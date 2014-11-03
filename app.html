@@ -8,11 +8,22 @@
 	<title>Straws</title>
 </head>
 <body>
-	<script>
 
-	window.fbAsyncInit = function() {
-		FB.init({
-			appId      : '890387507641159',
+  <div id="friends" class="text-center">
+    <h1>All your friends.</h1>
+  </div>
+  <center>
+    <select id="select" type="select">
+      <option>Select a friend</option>
+    </select>
+    <div type="button" class="btn btn-default" onclick="getFriends()">Get Friends</div>
+  </center>
+
+  <script>
+
+  window.fbAsyncInit = function() {
+    FB.init({
+     appId      : '890387507641159',
     cookie     : true,  // enable cookies to allow the server to access the session
     status     : true,
     xfbml      : true,  // parse social plugins on this page
@@ -40,6 +51,7 @@
       for(var i = 0; i<response.data.length; i++){
         var para = document.createElement("option");
         var node = document.createTextNode(response.data[i].name);
+        console.log(i);
         para.appendChild(node);
         var element = document.getElementById("select");
         element.appendChild(para);
@@ -93,19 +105,7 @@ document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
   		console.log('Successful login for: ' + response.name);
   	});
   }
-
-
   </script>
-
-  <div id="friends" class="text-center">
-    <h1>All your friends.</h1>
-  </div>
-  <center>
-    <select id="select" type="select">
-        <option>Select a friend</option>
-    </select>
-    <div type="button" class="btn btn-default" onclick="getFriends()">Get Friends</div>
-  </center>
 
 </body>
 </head>
