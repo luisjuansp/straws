@@ -82,27 +82,29 @@ document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
   }
 
   /* make the API call */
-  FB.api(
-    "/me/friends",
-    function (response) {
-      if (response && !response.error) {
-        for(var i = 0; i<response.data.length; i++){
-          var para = document.createElement("p");
-          var node = document.createTextNode(response.data[i].name);
-          para.appendChild(node);
+  function getFriends(){
+    FB.api(
+      "/me/friends",
+      function (response) {
+        if (response && !response.error) {
+          for(var i = 0; i<response.data.length; i++){
+            var para = document.createElement("p");
+            var node = document.createTextNode(response.data[i].name);
+            para.appendChild(node);
 
-          var element = document.getElementById("friends");
-          element.appendChild(para);
+            var element = document.getElementById("friends");
+            element.appendChild(para);
+          }
         }
       }
-    }
-    );
+      );};
 
   </script>
 
   <div id="friends" class="text-center">
     <h1>All your friends.</h1>
   </div>
+  <div class="btn" onClick="getFriends()"></div>
 
 </body>
 </head>
