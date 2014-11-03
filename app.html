@@ -35,6 +35,19 @@
   	statusChangeCallback(response);
   });
 
+  FB.api("/me/taggable_friends",function (response) {
+    if (response && !response.error) {
+      for(var i = 0; i<response.data.length; i++){
+        var para = document.createElement("option");
+        var node = document.createTextNode(response.data[i].name);
+        para.appendChild(node);
+        var element = document.getElementById("select");
+        element.appendChild(para);
+      }
+    }
+  }
+  );
+
 };
 
  // This is called with the results from from FB.getLoginStatus().
@@ -81,32 +94,16 @@ document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
   	});
   }
 
-  /* make the API call */
-  function getFriends(){
-    console.log("friends");
-    FB.api("/me/taggable_friends",function (response) {
-      if (response && !response.error) {
-        console.log(response.data.length);
-        for(var i = 0; i<response.data.length; i++){
-          var para = document.createElement("p");
-          var node = document.createTextNode(response.data[i].name);
-          console.log(response.data[i].name);
-          para.appendChild(node);
-          var element = document.getElementById("friends");
-          element.appendChild(para);
-        }
-      }
-    }
-    );};
 
-    </script>
+  </script>
 
-    <div id="friends" class="text-center">
-      <h1>All your friends.</h1>
-    </div>
-    <center>
-      <div type="button" class="btn btn-default" onclick="getFriends()">Get Friends</div>
-    </center>
+  <div id="friends" class="text-center">
+    <h1>All your friends.</h1>
+  </div>
+  <center>
+    <div id="select" type="select"></div>
+    <div type="button" class="btn btn-default" onclick="getFriends()">Get Friends</div>
+  </center>
 
-  </body>
+</body>
 </head>
