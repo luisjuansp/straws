@@ -46,20 +46,6 @@
   	statusChangeCallback(response);
   });
 
-  FB.api("/me/taggable_friends",function (response) {
-    console.log(response.data.length);
-    if (response && !response.error) {
-      for(var i = 0; i<response.data.length; i++){
-        var para = document.createElement("option");
-        var node = document.createTextNode(response.data[i].name);
-        console.log(i);
-        para.appendChild(node);
-        var element = document.getElementById("select");
-        element.appendChild(para);
-      }
-    }
-  });
-
 };
 
  // This is called with the results from from FB.getLoginStatus().
@@ -73,18 +59,30 @@
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
+      FB.api("/me/taggable_friends",function (response) {
+        console.log(response.data.length);
+        if (response && !response.error) {
+          for(var i = 0; i<response.data.length; i++){
+            var para = document.createElement("option");
+            var node = document.createTextNode(response.data[i].name);
+            console.log(i);
+            para.appendChild(node);
+            var element = document.getElementById("select");
+            element.appendChild(para);
+          }
+        }
+      });
     } else if (response.status === 'not_authorized') {
-/*  	FB.login(
-  		function(response) {
-  			console.log(response);
-  		},
-  		{
-  			scope: 'public_profile,email,user_friends',
-  			auth_type: 'rerequest'
-  		}
-  		);*/
-document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
-} else {
+     FB.login(
+      function(response) {
+       console.log(response);
+     },
+     {
+       scope: 'public_profile,email,user_friends',
+       auth_type: 'rerequest'
+     }
+     );
+   } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
       window.location = "index.html";
