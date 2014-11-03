@@ -80,13 +80,7 @@ document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
   		console.log('Successful login for: ' + response.name);
   	});
   }
-  </script>
 
-  <div id="friends">
-    <p id="p1">All your friends.</p>
-  </div>
-
-  <script>
   /* make the API call */
   FB.api(
     "/me/friends",
@@ -103,7 +97,12 @@ document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
       }
     }
     );
+  
   </script>
+
+  <div id="friends">
+    <p id="p1">All your friends.</p>
+  </div>
 
 </body>
 </head>
