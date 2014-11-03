@@ -86,7 +86,7 @@ document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
     console.log("friends");
     FB.api("/me/friends",function (response) {
       if (response && !response.error) {
-        console.log(response.data.length);
+        console.log(response.length);
         for(var i = 0; i<response.data.length; i++){
           var para = document.createElement("p");
           var node = document.createTextNode(response.data[i].name);
