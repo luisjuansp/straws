@@ -47,6 +47,7 @@
   });
 
   FB.api("/me/taggable_friends",function (response) {
+    console.log("friends");
     if (response && !response.error) {
       for(var i = 0; i<response.data.length; i++){
         var para = document.createElement("option");
