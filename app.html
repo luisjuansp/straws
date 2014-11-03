@@ -83,6 +83,7 @@ document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
 
   /* make the API call */
   function getFriends(){
+    console.log("friends");
     FB.api(
       "/me/friends",
       function (response) {
