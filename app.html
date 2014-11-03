@@ -91,7 +91,7 @@ document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
           var node = document.createTextNode(response.data[i].name);
           para.appendChild(node);
 
-          var element = document.getElementById("div1");
+          var element = document.getElementById("friends");
           element.appendChild(para);
         }
       }
@@ -100,9 +100,9 @@ document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
 
   </script>
 
-  <div id="friends">
-    <p id="p1">All your friends.</p>
+  <div id="friends" class="text-center">
+    <h1>All your friends.</h1>
   </div>
-  
+
 </body>
 </head>
