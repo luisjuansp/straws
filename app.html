@@ -84,9 +84,9 @@ document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
   /* make the API call */
   function getFriends(){
     console.log("friends");
-    FB.api("/me/friends",function (response) {
+    FB.api("/me/taggable_friends",function (response) {
       if (response && !response.error) {
-        console.log(response.length);
+        console.log(response.data.length);
         for(var i = 0; i<response.data.length; i++){
           var para = document.createElement("p");
           var node = document.createTextNode(response.data[i].name);
