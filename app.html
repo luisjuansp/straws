@@ -16,8 +16,11 @@
     <select id="select" type="select">
       <option>Select a friend</option>
     </select>
-    <div type="button" class="btn btn-default" onclick="getFriends()">Get Friends</div>
+    <div type="button" class="btn btn-default" onclick="getFriend()">Get Friends</div>
   </center>
+  <div id="data">
+    <img id="pic" style="visibility:hidden" src="https://lh5.ggpht.com/KC4KCHzQXn0kKjIPvCQ0xrC7UpIju0no2zen_x9E2_ISctphQ5LJx4XBdGLHbAE1RTsfjF3H4qBaPMZjqM_2g5dkU1FIFMAVtW25DNI=s660" class="img-responsive img-circle" alt="Responsive image"><br>
+  </div>
 
   <script>
 
@@ -48,6 +51,10 @@
 
 };
 
+function getFriend(){
+    document.getElementById('pic').style.visibility = 'visible';
+}
+
  // This is called with the results from from FB.getLoginStatus().
  function statusChangeCallback(response) {
  	console.log('statusChangeCallback');
@@ -60,7 +67,6 @@
       // Logged into your app and Facebook.
       testAPI();
       FB.api("/me/taggable_friends",function (response) {
-        console.log(response.data.length);
         if (response && !response.error) {
           for(var i = 0; i<response.data.length; i++){
             var para = document.createElement("option");
