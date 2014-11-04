@@ -16,7 +16,7 @@
     <select id="select" type="select">
       <option>Select a friend</option>
     </select>
-    <div type="button" id="friends" class="btn btn-default" >Get Friends</div>
+    <div type="button" id="friends" class="btn btn-default" onclick="getFriends()">Get Friends</div>
   </center>
   <div id="data" class="text-center">
     <img id="pic" style="visibility:hidden" src="https://lh5.ggpht.com/KC4KCHzQXn0kKjIPvCQ0xrC7UpIju0no2zen_x9E2_ISctphQ5LJx4XBdGLHbAE1RTsfjF3H4qBaPMZjqM_2g5dkU1FIFMAVtW25DNI=s660" class="img-responsive img-circle" alt="Responsive image"><br>
@@ -54,12 +54,6 @@
   });
 
 };
-
-
-  $("friends").click(function(){
-    $("list").append($("<li class=\"list-group-item\">( \"#select option:selected\" ).text()</li>"));
-  });
-
 
 function getFriend(){
   var para = $("<li class=\"list-group-item\"></li>");
