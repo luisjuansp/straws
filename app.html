@@ -52,8 +52,7 @@
 };
 
 function getFriend(){
-  var i = 'span class="label label-success"'
-  var para = document.createElement(i);
+  var para = document.createElement("label");
   var node = document.createTextNode(  $( "#select option:selected" ).text());
   console.log(  $( "#select option:selected" ).text());
   para.appendChild(node);
