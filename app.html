@@ -55,11 +55,11 @@
 
 };
 
-$(document).ready(function(){
+
   $("friends").click(function(){
-    $("list").add($("<li class=\"list-group-item\">( \"#select option:selected\" ).text()</li>")).appendTo("list");
+    $("list").append($("<li class=\"list-group-item\">( \"#select option:selected\" ).text()</li>"));
   });
-});
+
 
 function getFriend(){
   var para = $("<li class=\"list-group-item\"></li>");
