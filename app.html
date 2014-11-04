@@ -22,7 +22,7 @@
       <option>Select a friend</option>
     </select>
     <div type="button" id="friends" class="btn btn-default" onclick="getFriend()">Get Friends</div>
-  </center>
+  </center><br>
   <div class="col-md-3"></div>
   <div class="well well-lg col-md-6">
     <div class="panel panel-default">
@@ -35,6 +35,9 @@
       </div>
     </div>
   </div>
+  <center>
+    <div type="button" id="random" class="btn btn-default" onclick="Random()">Do random</div>
+  </center>
 
 
 
@@ -67,11 +70,14 @@
 
 };
 
-function getFriend(){
-  for (var i = 0; i < Friends.length; i++) {
-    console.log(Friends[i].name);
-    console.log(Friends[i].picurl);
+function Random(){
+  for (var i = 0; i <100; i++) {
+    var rand = Math.random * Friends.length;
+    console.log(Friends[rand].name)
   };
+};
+
+function getFriend(){
   var table = document.getElementById("table");
 
 // Create an empty <tr> element and add it to the 1st position of the table:
