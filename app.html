@@ -38,10 +38,26 @@
     </div>
   </div>
   <div class="row text-center">
-    <div type="button" id="random" class="btn btn-default" onclick="Random()">Do random</div>
+    <div type="button" id="random" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="Random()">Do random</div>
+  </div><br>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="randname"></h4>
+        </div>
+        <div class="modal-body" id="randpic">
+          <img class="image-responsive" id="randpic" >
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
-
-
 
   <script>
 
@@ -73,11 +89,14 @@
 };
 
 function Random(){
+  var rand;
   for (var i = 0; i <100; i++) {
-    var rand = Math.floor(Math.random() * Friends.length);
+    rand = Math.floor(Math.random() * Friends.length);
     console.log(rand);
     console.log(Friends[rand].name);
   };
+  $("#toptitle").text(Friends[rand].name);
+  $("#my_image").attr("src",Friends[rand].pic);
 };
 
 function getFriend(){
