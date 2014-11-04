@@ -68,6 +68,10 @@
 };
 
 function getFriend(){
+  for (var i = 0; i < Friends.length; i++) {
+    console.log(Friends[i].name);
+    console.log(Friends[i].picurl);
+  };
   var table = document.getElementById("table");
 
 // Create an empty <tr> element and add it to the 1st position of the table:
@@ -88,14 +92,13 @@ FB.api("/me/taggable_friends",function (response) {
         cell2.innerHTML =  $( "#select option:selected" ).text();
         var friend = {
           name : response.data[i].name,
-          pic : response.data[i].picture.data.url
+          picurl : response.data[i].picture.data.url
         };
         Friends[Friends.length] = friend;
       }
     }
   }
 });
-document.getElementById('pic').style.visibility = 'visible';
 rows = rows + 1;
 }
 
