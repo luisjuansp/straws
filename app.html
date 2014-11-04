@@ -9,7 +9,7 @@
   <title>Straws</title>
   <script type="text/javascript">
   var rows = 0;
-  
+  var Friends = [];
   </script>
 </head>
 <body>
@@ -76,7 +76,6 @@ var row = table.insertRow(rows);
 // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
 var cell1 = row.insertCell(0);
 var cell2 = row.insertCell(1);
-
 // Add some text to the new cells:
 FB.api("/me/taggable_friends",function (response) {
   if (response && !response.error) {
@@ -87,6 +86,11 @@ FB.api("/me/taggable_friends",function (response) {
         img.src = response.data[i].picture.data.url;
         cell1.appendChild(img);
         cell2.innerHTML =  $( "#select option:selected" ).text();
+        var friend = {
+          name : response.data[i].name,
+          pic : response.data[i].picture.data.url
+        };
+        Friends[Friends.length] = friend;
       }
     }
   }
