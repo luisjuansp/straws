@@ -49,7 +49,7 @@
           <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
           <h4 class="modal-title" id="randname"></h4>
         </div>
-        <div class="modal-body" id="randpic">
+        <div class="modal-body">
           <img class="image-responsive" id="randpic" >
         </div>
         <div class="modal-footer">
@@ -95,11 +95,12 @@ function Random(){
     console.log(rand);
     console.log(Friends[rand].name);
   };
-  $("#toptitle").text(Friends[rand].name);
-  $("#my_image").attr("src",Friends[rand].pic);
+  $("#randname").text(Friends[rand].name);
+  $("#randpic").attr("src",Friends[rand].pic);
 };
 
 function getFriend(){
+  var name = $( "#select option:selected" ).text();
   var table = document.getElementById("table");
 
 // Create an empty <tr> element and add it to the 1st position of the table:
@@ -112,12 +113,12 @@ var cell2 = row.insertCell(1);
 FB.api("/me/taggable_friends",function (response) {
   if (response && !response.error) {
     for(var i = 0; i<response.data.length; i++){
-      if (response.data[i].name== $( "#select option:selected" ).text()){
+      if (response.data[i].name== name){
         $("#pic").attr("src", response.data[i].picture.data.url);
         var img = document.createElement('img');
         img.src = response.data[i].picture.data.url;
         cell1.appendChild(img);
-        cell2.innerHTML =  $( "#select option:selected" ).text();
+        cell2.innerHTML = name;
         var friend = {
           name : response.data[i].name,
           picurl : response.data[i].picture.data.url
