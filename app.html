@@ -58,7 +58,7 @@
 function getFriend(){
   var para = $("<li class=\"list-group-item\"></li>");
   var node = document.createTextNode(  $( "#select option:selected" ).text());
-  para.appendChild(node);
+  para.append(node);
   var element = document.getElementById("list");
   element.appendChild(para);
   FB.api("/me/taggable_friends",function (response) {
