@@ -52,7 +52,14 @@
 };
 
 function getFriend(){
-    document.getElementById('pic').style.visibility = 'visible';
+  var i = 'span class="label label-success"'
+  var para = document.createElement(i);
+  var node = document.createTextNode(  $( "#select option:selected" ).text());
+  console.log(  $( "#select option:selected" ).text());
+  para.appendChild(node);
+  var element = document.getElementById("data");
+  element.appendChild(para);
+  document.getElementById('pic').style.visibility = 'visible';
 }
 
  // This is called with the results from from FB.getLoginStatus().
