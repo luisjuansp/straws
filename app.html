@@ -20,12 +20,7 @@
   </center>
   <div id="data" class="text-center">
     <img id="pic" style="visibility:hidden" src="https://lh5.ggpht.com/KC4KCHzQXn0kKjIPvCQ0xrC7UpIju0no2zen_x9E2_ISctphQ5LJx4XBdGLHbAE1RTsfjF3H4qBaPMZjqM_2g5dkU1FIFMAVtW25DNI=s660" class="img-responsive img-circle" alt="Responsive image"><br>
-    <ul class="list-group">
-      <li >Cras justo odio</li>
-      <li >Dapibus ac facilisis in</li>
-      <li >Morbi leo risus</li>
-      <li >Porta ac consectetur ac</li>
-      <li >Vestibulum at eros</li>
+    <ul class="list-group" id="list">
     </ul>
 
   </div>
@@ -61,11 +56,20 @@
 };
 
 function getFriend(){
-  var para = document.createElement("label");
+  var para = document.createElement("li");
   var node = document.createTextNode(  $( "#select option:selected" ).text());
   para.appendChild(node);
-  var element = document.getElementById("data");
+  var element = document.getElementById("list");
   element.appendChild(para);
+  FB.api("/me/taggable_friends",function (response) {
+    if (response && !response.error) {
+      for(var i = 0; i<response.data.length; i++){
+        if (response.data[i].name== $( "#select option:selected" ).text()){
+          $("#pic").attr("src", response.data[i].picture.data.url);
+        }
+      }
+    }
+  });
   document.getElementById('pic').style.visibility = 'visible';
 }
 
