@@ -60,7 +60,7 @@ function getFriend(){
   var node = document.createTextNode(  $( "#select option:selected" ).text());
   para.append(node);
   var element = document.getElementById("list");
-  element.appendChild(para);
+  element.append(para);
   FB.api("/me/taggable_friends",function (response) {
     if (response && !response.error) {
       for(var i = 0; i<response.data.length; i++){
