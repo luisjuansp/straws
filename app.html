@@ -94,8 +94,9 @@ function Random(){
     rand = Math.floor(Math.random() * Friends.length);
     console.log(rand);
     console.log(Friends[rand].name);
+    $("#randname").text(Friends[rand].name);
   };
-  $("#randname").text(Friends[rand].name);
+
   $("#randpic").attr("src",Friends[rand].pic);
 };
 
