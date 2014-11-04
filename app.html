@@ -56,7 +56,7 @@
 };
 
 function getFriend(){
-  var para = $("<li></li>").addClass(list-group-item);
+  var para = &("<li class='list-group-item'></li>");
   var node = document.createTextNode(  $( "#select option:selected" ).text());
   para.appendChild(node);
   var element = document.getElementById("list");
