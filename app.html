@@ -21,7 +21,7 @@
     <select id="select" type="select">
       <option>Select a friend</option>
     </select>
-    <div type="button" id="friends" class="btn btn-default" onclick="getFriend()">Add Friend</div>
+    <div type="button" id="friends" class="btn btn-default">Add Friend</div>
   </center><br>
   <div class="col-md-3"></div>
   <div class="row text-center">
@@ -51,7 +51,7 @@
         </div>
         <div class="modal-body text-center">
           <img class="image-responsive" id="randpic" >
-          <div type="button" id="startrandom" class="btn btn-primary">Start</div>
+          <div type="button" id="startrandom" class="btn btn-primary" onclick="startRandom()">Start</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
@@ -118,10 +118,13 @@ function startRandom(){
     ,50);
 }
 
-$("#startrandom").one( "click", function() {
+$("#friends").one( "click", function() {
+  getFriend();
+}
+
+$("#startrandom").click(function(){
   $(this).hide();
   $("#randpic").show();
-  startRandom();
 });
 
 $("#random").click(function(){
