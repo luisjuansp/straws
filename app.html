@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class="row text-center">
-    <div type="button" id="random" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="Random(0)">Do random</div>
+    <div type="button" id="random" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="Random()">Do random</div>
   </div><br>
 
   <!-- Modal -->
@@ -91,18 +91,29 @@ function donothing() {
 
 }
 
-function Random(i){
-  var rand;
+var rand;
+var i=0;
+
+function Random(){
   rand = Math.floor(Math.random() * Friends.length);
   console.log(i);
   $("#randname").text(Friends[rand].name);
   $("#randpic").attr("src",Friends[rand].picurl);
   i=i+1;
-  if(i<10)
-  {
-    setTimeout(Random(i),5000);
-  }
+  startRandom();
 };
+
+function startRandom(){
+  setTimeout(
+    function(){
+      if (i < 10) {
+        Random();
+      }else{
+        i = 0;
+      }
+    }
+    ,5000);
+}
 
 function getFriend(){
   var name = $( "#select option:selected" ).text();
@@ -192,4 +203,4 @@ rows = rows + 1;
   </script>
 
 </body>
-</head>
+</html>
