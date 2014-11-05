@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class="row text-center">
-    <div type="button" id="random" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="Random()">Do random</div>
+    <div type="button" id="random" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Do Straws</div>
   </div><br>
 
   <!-- Modal -->
@@ -51,6 +51,7 @@
         </div>
         <div class="modal-body">
           <img class="image-responsive" id="randpic" >
+          <div type="button" id="startrandom" class="btn btn-primary" onclick="Random()">Start</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
@@ -112,7 +113,7 @@ function startRandom(){
         i = 0;
       }
     }
-    ,5000);
+    ,500);
 }
 
 function getFriend(){
