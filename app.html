@@ -130,21 +130,19 @@ $("#random").click(function(){
 });
 
 function getPic(){
-  if(true){
-    FB.api("/me/picture", function (response) {
-      console.log("response.url");
-      if (response && !response.error) {
-        console.log(response.url);
-        var img = document.createElement('img');
-        img.src = response.url;
-        cell1.appendChild(img);
-        var friend = {
+  FB.api("/me/picture", function (response) {
+    console.log("response.url");
+    if (response && !response.error) {
+      console.log(response.url);
+      var img = document.createElement('img');
+      img.src = response.url;
+      cell1.appendChild(img);
+      var friend = {
         picurl : img.src,
-        };
-        Friends[Friends.length] = friend;
-      }
-    });
-  }
+      };
+      Friends[Friends.length] = friend;
+    }
+  });
 }
 
 function getFriend(){
@@ -162,9 +160,12 @@ var cell2 = row.insertCell(1);
 FB.api("/me",function (response) {
   if (response && !response.error) {
     if (response.name== name){
+      getPic();
       cell2.innerHTML = name;
-      var friend = Friends[Friends.length];
-      friend.name = name;
+      var friend = {
+        picurl : Friends[Friends.length].picurl,
+        name : name
+      };
       Friends[Friends.length] = friend;
     } 
   }
