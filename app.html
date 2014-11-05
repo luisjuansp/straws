@@ -102,10 +102,10 @@ function Random(){
   $("#randpic").attr("src",Friends[rand].picurl);
   i=i+1;
   if (i < 10) {
+    setTimeout(Random(),500);
   }else{
     i = 0;
   }
-  setTimeout(Random(),500);
 };
 
 function startRandom(){
