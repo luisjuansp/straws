@@ -51,7 +51,7 @@
         </div>
         <div class="modal-body text-center">
           <img class="image-responsive" id="randpic" >
-          <div type="button" id="startrandom" class="btn btn-primary" onclick="startRandom()">Start</div>
+          <div type="button" id="startrandom" class="btn btn-primary">Start</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
@@ -118,9 +118,10 @@ function startRandom(){
     ,50);
 }
 
-$("#startrandom").click(function(){
+$("#startrandom").one( "click", function() {
   $(this).hide();
   $("#randpic").show();
+  startRandom();
 });
 
 $("#random").click(function(){
