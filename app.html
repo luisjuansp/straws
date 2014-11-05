@@ -21,7 +21,7 @@
     <select id="select" type="select">
       <option>Select a friend</option>
     </select>
-    <div type="button" id="friends" class="btn btn-default" onclick="getFriend()">Get Friend</div>
+    <div type="button" id="friends" class="btn btn-default" onclick="getFriend()">Add Friend</div>
   </center><br>
   <div class="col-md-3"></div>
   <div class="row text-center">
@@ -98,7 +98,6 @@ var i=0;
 function Random(){
   rand = Math.floor(Math.random() * Friends.length);
   console.log(i);
-  $("#randname").text(Friends[rand].name);
   $("#randpic").attr("src",Friends[rand].picurl);
   i=i+1;
   startRandom();
@@ -107,13 +106,17 @@ function Random(){
 function startRandom(){
   setTimeout(
     function(){
-      if (i < 10) {
+      if (i < 100) {
         Random();
       }else{
+        rand = Math.floor(Math.random() * Friends.length);
+        console.log(i);
+        $("#randname").text(Friends[rand].name);
+        $("#randpic").attr("src",Friends[rand].picurl);
         i = 0;
       }
     }
-    ,500);
+    ,50);
 }
 
 function getFriend(){
