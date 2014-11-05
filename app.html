@@ -118,7 +118,8 @@ function startRandom(){
     ,50);
 }
 
-$("#friends").one( "click", function() {
+$( "#friends" ).one( "click", function() {
+  alert( "This will be displayed only once." );
   getFriend();
 });
 
