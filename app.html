@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class="row text-center">
-    <div type="button" id="random" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="Random()">Do random</div>
+    <div type="button" id="random" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="Random(0)">Do random</div>
   </div><br>
 
   <!-- Modal -->
@@ -91,8 +91,8 @@ function donothing() {
 
 }
 
-function Random(){
-  var rand, i=0;
+function Random(var i){
+  var rand;
   rand = Math.floor(Math.random() * Friends.length);
   console.log(rand);
   console.log(Friends[rand].name);
@@ -101,7 +101,7 @@ function Random(){
   i=i+1;
   if(i<10)
   {
-    setTimeout(Random(),500);
+    setTimeout(Random(i),500);
   }
 };
 
