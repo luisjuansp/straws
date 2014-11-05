@@ -97,7 +97,7 @@ var i=0;
 
 function Random(){
   rand = Math.floor(Math.random() * Friends.length);
-  $("#randpic").attr("src",Friends[rand].picurl);
+  $("#randpic").attr("src",Friends[rand].picurl + "?type=large");
   i=i+1;
   startRandom();
 };
@@ -110,7 +110,7 @@ function startRandom(){
       }else{
         rand = Math.floor(Math.random() * Friends.length);
         $("#randname").text(Friends[rand].name);
-        $("#randpic").attr("src",Friends[rand].picurl);
+        $("#randpic").attr("src",Friends[rand].picurl + "?type=large");
         $("#randname").show();
         i = 0;
       }
