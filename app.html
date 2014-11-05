@@ -156,10 +156,9 @@ FB.api("/me",function (response) {
         var img = document.createElement('img');
         img.src = response.url;
         cell1.appendChild(img);
-        Friends[Friends.length].picurl = img.src,
+        Friends[Friends.length].picurl = img.src;
       };
-    }
-  });
+    });
       cell2.innerHTML = name;
       Friends[Friends.length].name = name,
     } 
