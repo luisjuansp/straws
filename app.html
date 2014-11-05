@@ -148,7 +148,7 @@ FB.api("/me",function (response) {
         name : "",
         picurl : ""
       };
-      FB.api("/me/picture", {"redirect": false}, function (response) {
+/*      FB.api("/me/picture", {"redirect": false}, function (response) {
         console.log("response.url");
         if (response && !response.error) {
           console.log(response.url);
@@ -158,6 +158,11 @@ FB.api("/me",function (response) {
           friend.picurl = img.src;
         };
       });
+*/     
+      var img = document.createElement('img');
+      img.src = "http://graph.facebook.com/"+response.id+"/picture";
+      cell1.appendChild(img);
+      friend.picurl = img.src;
       cell2.innerHTML = name;
       friend.name = name;
       Friends[Friends.length] = friend;
