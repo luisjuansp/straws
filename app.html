@@ -117,9 +117,9 @@ function startRandom(){
     ,50);
 }
 
-  $("#startrandom").click(function(){
-    $(this).hide();
-  });
+$("#startrandom").click(function(){
+  $(this).hide();
+});
 
 function getFriend(){
   var name = $( "#select option:selected" ).text();
@@ -164,6 +164,13 @@ rows = rows + 1;
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
+      FB.api("/me",function (response){
+        var para = document.createElement("option");
+        var node = document.createTextNode(response.name);
+        para.appendChild(node);
+        var element = document.getElementById("select");
+        element.appendChild(para);
+      });
       FB.api("/me/taggable_friends",function (response) {
         if (response && !response.error) {
           for(var i = 0; i<response.data.length; i++){
