@@ -163,7 +163,9 @@ FB.api("/me",function (response) {
   if (response && !response.error) {
     if (response.name== name){
       cell2.innerHTML = name;
-      Friends[Friends.length].name = name;
+      var friend = Friends[Friends.length];
+      friend.name = name;
+      Friends[Friends.length] = friend;
     } 
   }
 });
