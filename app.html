@@ -94,8 +94,7 @@ function donothing() {
 function Random(i){
   var rand;
   rand = Math.floor(Math.random() * Friends.length);
-  console.log(rand);
-  console.log(Friends[rand].name);
+  console.log(i);
   $("#randname").text(Friends[rand].name);
   $("#randpic").attr("src",Friends[rand].picurl);
   i=i+1;
