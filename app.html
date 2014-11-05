@@ -132,11 +132,23 @@ var row = table.insertRow(rows);
 var cell1 = row.insertCell(0);
 var cell2 = row.insertCell(1);
 // Add some text to the new cells:
+FB.api("/me",function (response) {
+  if (response && !response.error) {
+    var img = document.createElement('img');
+    img.src = response.picture.data.url;
+    cell1.appendChild(img);
+    cell2.innerHTML = name;
+    var friend = {
+      name : response.name,
+      picurl : response.picture.data.url
+    };
+    Friends[Friends.length] = friend;
+  }
+});
 FB.api("/me/taggable_friends",function (response) {
   if (response && !response.error) {
     for(var i = 0; i<response.data.length; i++){
       if (response.data[i].name== name){
-        $("#pic").attr("src", response.data[i].picture.data.url);
         var img = document.createElement('img');
         img.src = response.data[i].picture.data.url;
         cell1.appendChild(img);
