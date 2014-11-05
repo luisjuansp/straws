@@ -92,18 +92,17 @@ function donothing() {
 }
 
 function Random(){
-  var rand;
-  for (var i = 0; i <100; i++) {
-    rand = Math.floor(Math.random() * Friends.length);
-    console.log(rand);
-    console.log(Friends[rand].name);
-    $("#randname").text(Friends[rand].name);
-    setTimeout(function(){
-    console.log('test');
-  },500);
-  };
-
+  var rand, i=0;
+  rand = Math.floor(Math.random() * Friends.length);
+  console.log(rand);
+  console.log(Friends[rand].name);
+  $("#randname").text(Friends[rand].name);
   $("#randpic").attr("src",Friends[rand].pic);
+  i=i+1;
+  if(i<100)
+  {
+    setTimeout(Random(),500);
+  }
 };
 
 function getFriend(){
