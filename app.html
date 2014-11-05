@@ -136,12 +136,19 @@ FB.api("/me",function (response) {
   if (response && !response.error) {
     if (response.name== name){
       var img = document.createElement('img');
-      img.src = response.picture.url;
+      FB.api(
+        "/me/picture",
+        function (response) {
+          if (response && !response.error) {
+            img.src = response.url;
+          }
+        }
+        );
       cell1.appendChild(img);
       cell2.innerHTML = name;
       var friend = {
-        name : response.name,
-        picurl : response.picture.url
+        name : name,
+        picurl : img.src
       };
       Friends[Friends.length] = friend;
     } 
@@ -156,8 +163,8 @@ FB.api("/me/taggable_friends",function (response) {
         cell1.appendChild(img);
         cell2.innerHTML = name;
         var friend = {
-          name : response.data[i].name,
-          picurl : response.data[i].picture.data.url
+          name : name,
+          picurl : img.src
         };
         Friends[Friends.length] = friend;
       }
