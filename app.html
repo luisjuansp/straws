@@ -120,16 +120,19 @@ function startRandom(){
 $("#startrandom").click(function(){
   $(this).hide();
   $("#randpic").show();
+  $("#randname").show();
 });
 
 $("#random").click(function(){
   $("#startrandom").show();
   $("#randpic").hide();
+  $("#randname").hide();
 });
 
 function getFriend(){
   var name = $( "#select option:selected" ).text();
   var table = document.getElementById("table");
+  var user = false;
 
 // Create an empty <tr> element and add it to the 1st position of the table:
 var row = table.insertRow(rows);
@@ -141,18 +144,27 @@ var cell2 = row.insertCell(1);
 FB.api("/me",function (response) {
   if (response && !response.error) {
     if (response.name== name){
-      var img = document.createElement('img');
-      img.src = response.picture.data.url;
-      cell1.appendChild(img);
+      user = true;
       cell2.innerHTML = name;
       var friend = {
         name : name,
-        picurl : img.src
       };
       Friends[Friends.length] = friend;
     } 
   }
 });
+if(user){
+  FB.api(
+    "/me/picture",
+    function (response) {
+      if (response && !response.error) {
+        var img = document.createElement('img');
+        img.src = response.url;
+        cell1.appendChild(img);
+        Friends[Friends.length].picurl : img.src;
+      }
+    });
+}
 FB.api("/me/taggable_friends",function (response) {
   if (response && !response.error) {
     for(var i = 0; i<response.data.length; i++){
