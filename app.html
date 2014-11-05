@@ -10,7 +10,6 @@
   <script type="text/javascript">
   var rows = 0;
   var Friends = [];
-  var exclusive = false;
   </script>
 </head>
 <body>
@@ -140,56 +139,52 @@ function isAdded(name){
 }
 
 function getFriend(){
-  if(!exclusive){
-    exclusive = true;
-    var name = $( "#select option:selected" ).text();
-    if(isAdded(name)){
-      var table = document.getElementById("table");
-      var user = false;
-      // Create an empty <tr> element and add it to the 1st position of the table:
-      var row = table.insertRow(rows);
-      // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-      var cell1 = row.insertCell(0);
-      var cell2 = row.insertCell(1);
-      // Add some text to the new cells:
-      FB.api("/me",function (response) {
-        if (response && !response.error) {
-          if (response.name== name){
-            var friend = {
-              name : "",
-              picurl : ""
-            };    
-            var img = document.createElement('img');
-            img.src = "http://graph.facebook.com/"+response.id+"/picture";
-            cell1.appendChild(img);
-            friend.picurl = img.src;
-            cell2.innerHTML = name;
-            friend.name = name;
+  var name = $( "#select option:selected" ).text();
+    var table = document.getElementById("table");
+    var user = false;
+    // Create an empty <tr> element and add it to the 1st position of the table:
+    var row = table.insertRow(rows);
+    // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    // Add some text to the new cells:
+    FB.api("/me",function (response) {
+      if (response && !response.error) {
+        if (response.name== name){
+          var friend = {
+            name : "",
+            picurl : ""
+          };    
+          var img = document.createElement('img');
+          img.src = "http://graph.facebook.com/"+response.id+"/picture";
+          friend.picurl = img.src;
+          friend.name = name;
+          if(isAdded(name)){
             Friends[Friends.length] = friend;
-          } 
-        }
-      });
-      FB.api("/me/taggable_friends",function (response) {
-        if (response && !response.error) {
-          for(var i = 0; i<response.data.length; i++){
-            if (response.data[i].name== name){
-              var img = document.createElement('img');
-              img.src = response.data[i].picture.data.url;
-              cell1.appendChild(img);
-              cell2.innerHTML = name;
-              var friend = {
-                name : name,
-                picurl : img.src
-              };
-              Friends[Friends.length] = friend;
-            }
+            cell1.appendChild(img);
+            cell2.innerHTML = name;
+          }
+        } 
+      }
+    });
+    FB.api("/me/taggable_friends",function (response) {
+      if (response && !response.error) {
+        for(var i = 0; i<response.data.length; i++){
+          if (response.data[i].name== name){
+            var img = document.createElement('img');
+            img.src = response.data[i].picture.data.url;
+            cell1.appendChild(img);
+            cell2.innerHTML = name;
+            var friend = {
+              name : name,
+              picurl : img.src
+            };
+            Friends[Friends.length] = friend;
           }
         }
-      });
-      rows = rows + 1;
-    }
-    exclusive = false;
-  }
+      }
+    });
+    rows = rows + 1;
 }
 
  // This is called with the results from from FB.getLoginStatus().
