@@ -87,6 +87,9 @@
   });
 
 };
+function donothing() {
+
+}
 
 function Random(){
   var rand;
@@ -95,7 +98,7 @@ function Random(){
     console.log(rand);
     console.log(Friends[rand].name);
     $("#randname").text(Friends[rand].name);
-    setTimeout(donothing,50);
+    setTimeout(donothing(),50);
   };
 
   $("#randpic").attr("src",Friends[rand].pic);
