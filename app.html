@@ -21,7 +21,7 @@
     <select id="select" type="select">
       <option>Select a friend</option>
     </select>
-    <div type="button" id="friends" class="btn btn-default" onclick="getFriend()">Get Friends</div>
+    <div type="button" id="friends" class="btn btn-default" onclick="getFriend()">Get Friend</div>
   </center><br>
   <div class="col-md-3"></div>
   <div class="row text-center">
@@ -98,7 +98,9 @@ function Random(){
     console.log(rand);
     console.log(Friends[rand].name);
     $("#randname").text(Friends[rand].name);
-    setTimeout(donothing(),50);
+    setTimeout(function(){
+    console.log('test');
+  },50);
   };
 
   $("#randpic").attr("src",Friends[rand].pic);
