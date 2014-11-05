@@ -51,7 +51,7 @@
         </div>
         <div class="modal-body text-center">
           <img class="image-responsive" id="randpic" >
-          <div type="button" id="startrandom" class="btn btn-primary" onclick="startRandom()">Start</div>
+          <div type="button" id="startrandom" data-toggle="startrandom" class="btn btn-primary" onclick="startRandom()">Start</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
@@ -97,7 +97,7 @@ var i=0;
 
 function Random(){
   rand = Math.floor(Math.random() * Friends.length);
-  console.log(i);
+  $("#randname").text(Friends[rand].name);
   $("#randpic").attr("src",Friends[rand].picurl);
   i=i+1;
   startRandom();
@@ -110,7 +110,6 @@ function startRandom(){
         Random();
       }else{
         rand = Math.floor(Math.random() * Friends.length);
-        console.log(i);
         $("#randname").text(Friends[rand].name);
         $("#randpic").attr("src",Friends[rand].picurl);
         i = 0;
