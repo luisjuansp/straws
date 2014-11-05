@@ -136,12 +136,12 @@ FB.api("/me",function (response) {
   if (response && !response.error) {
     if (response.name== name){
       var img = document.createElement('img');
-      img.src = response.picture.data.url;
+      img.src = response.picture.url;
       cell1.appendChild(img);
       cell2.innerHTML = name;
       var friend = {
         name : response.name,
-        picurl : response.picture.data.url
+        picurl : response.picture.url
       };
       Friends[Friends.length] = friend;
     } 
