@@ -122,7 +122,7 @@ $("#startrandom").click(function(){
 });
 
 $("#random").click(function(){
-  $(this).show();
+  $("#startrandom").show();
 });
 
 function getFriend(){
@@ -140,14 +140,7 @@ FB.api("/me",function (response) {
   if (response && !response.error) {
     if (response.name== name){
       var img = document.createElement('img');
-      FB.api(
-        "/me/picture",
-        function (response) {
-          if (response && !response.error) {
-            img.src = response.url;
-          }
-        }
-        );
+      img.src = response.picture.url;
       cell1.appendChild(img);
       cell2.innerHTML = name;
       var friend = {
