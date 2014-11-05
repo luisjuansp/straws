@@ -134,7 +134,7 @@ var cell2 = row.insertCell(1);
 // Add some text to the new cells:
 FB.api("/me",function (response) {
   if (response && !response.error) {
-    if (response.data[i].name== name){
+    if (response.name== name){
       var img = document.createElement('img');
       img.src = response.picture.data.url;
       cell1.appendChild(img);
