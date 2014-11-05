@@ -10,6 +10,7 @@
   <script type="text/javascript">
   var rows = 0;
   var Friends = [];
+  var exclusive = false;
   </script>
 </head>
 <body>
@@ -139,6 +140,10 @@ function isAdded(name){
 }
 
 function getFriend(){
+  while(exclusive){
+
+  }
+  exclusive = true;
   var name = $( "#select option:selected" ).text();
   if(isAdded(name)){
     var table = document.getElementById("table");
@@ -185,6 +190,7 @@ function getFriend(){
     });
     rows = rows + 1;
   }
+  exclusive = false;
 }
 
  // This is called with the results from from FB.getLoginStatus().
