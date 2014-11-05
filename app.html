@@ -129,6 +129,24 @@ $("#random").click(function(){
   $("#randname").hide();
 });
 
+function getPic(){
+  if(true){
+    FB.api("/me/picture", function (response) {
+      console.log("response.url");
+      if (response && !response.error) {
+        console.log(response.url);
+        var img = document.createElement('img');
+        img.src = response.url;
+        cell1.appendChild(img);
+        var friend = {
+        picurl : img.src,
+        };
+        Friends[Friends.length] = friend;
+      }
+    });
+  }
+}
+
 function getFriend(){
   var name = $( "#select option:selected" ).text();
   var table = document.getElementById("table");
@@ -144,27 +162,11 @@ var cell2 = row.insertCell(1);
 FB.api("/me",function (response) {
   if (response && !response.error) {
     if (response.name== name){
-      user = true;
       cell2.innerHTML = name;
-      var friend = {
-        name : name,
-      };
-      Friends[Friends.length] = friend;
+      Friends[Friends.length].name = name;
     } 
   }
 });
-if(true){
-  FB.api("/me/picture", function (response) {
-        console.log("response.url");
-      if (response && !response.error) {
-        console.log(response.url);
-        var img = document.createElement('img');
-        img.src = response.url;
-        cell1.appendChild(img);
-        Friends[Friends.length].picurl = img.src;
-      }
-    });
-}
 FB.api("/me/taggable_friends",function (response) {
   if (response && !response.error) {
     for(var i = 0; i<response.data.length; i++){
