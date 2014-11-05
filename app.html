@@ -119,10 +119,12 @@ function startRandom(){
 
 $("#startrandom").click(function(){
   $(this).hide();
+  $("#randpic").show();
 });
 
 $("#random").click(function(){
   $("#startrandom").show();
+  $("#randpic").hide();
 });
 
 function getFriend(){
@@ -140,7 +142,7 @@ FB.api("/me",function (response) {
   if (response && !response.error) {
     if (response.name== name){
       var img = document.createElement('img');
-      img.src = response.picture.url;
+      img.src = response.picture.data.url;
       cell1.appendChild(img);
       cell2.innerHTML = name;
       var friend = {
