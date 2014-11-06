@@ -94,6 +94,7 @@ function donothing(num) {
 
 function eraseRow(num){
   console.log(num);
+  Friends.splice(num,1);
   for (var i = num; i < rows - 1; i++) {
     document.getElementById("table").rows[i] = document.getElementById("table").rows[i + 1];
     var btn = document.createElement('button');
@@ -106,6 +107,7 @@ function eraseRow(num){
     cell.appendChild(btn);
   };
   document.getElementById("table").deleteRow(rows-1);
+  rows = rows-1;
 }
 
 var rand;
