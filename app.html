@@ -96,10 +96,10 @@ function eraseRow(num){
   console.log(num);
   Friends.splice(num,1);
   for (var i = num; i < rows - 1; i++) {
-    document.getElementById("table").rows[i] = document.getElementById("table").rows[i + 1];
+    document.getElementById("table").rows[i+1] = document.getElementById("table").insertRow(i);
     var btn = document.createElement('button');
     btn.setAttribute('class', 'btn btn-danger');
-    btn.setAttribute('onclick', 'eraseRow('+i+')');
+    btn.setAttribute('onclick', 'eraseRow('+ i +')');
     btn.innerHTML = "X";
     btn.id = "del" + i.toString();
     document.getElementById("table").rows[i].deleteCell(2);
