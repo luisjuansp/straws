@@ -103,7 +103,7 @@ function eraseRow(num){
     btn.innerHTML = "X";
     btn.id = "del" + i.toString();
     document.getElementById("table").rows[i].deleteCell(2);
-    var cell = row.insertCell(2);
+    var cell = document.getElementById("table").rows[i].insertCell(2);
     cell.appendChild(btn);
   };
   document.getElementById("table").deleteRow(rows-1);
