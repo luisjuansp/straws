@@ -87,8 +87,8 @@
   });
 
 };
-function donothing() {
-  console.log("nothing");
+function donothing(num) {
+  console.log(num);
 }
 
 var rand;
@@ -157,7 +157,7 @@ function getFriend(){
             var row = table.insertRow(rows);
             var btn = document.createElement('button');
             btn.setAttribute('class', 'btn btn-danger');
-            btn.setAttribute('onclick', 'donothing()');
+            btn.setAttribute('onclick', 'donothing('+rows+')');
             btn.innerHTML = "X";
             btn.id = "del" + rows.toString();
             rows = rows + 1;
@@ -190,7 +190,7 @@ function getFriend(){
             var row = table.insertRow(rows);
             var btn = document.createElement('button');
             btn.setAttribute('class', 'btn btn-danger');
-            btn.setAttribute('onclick', 'donothing()');
+            btn.setAttribute('onclick', 'donothing('+rows+')');
             btn.innerHTML = "X";
             btn.id = "del" + rows.toString();
             rows = rows + 1;
