@@ -254,7 +254,7 @@ FB.api("/me/taggable_friends",function (response) {
         para.appendChild(node);
         var element = document.getElementById("select");
         element.appendChild(para);
-        Options[Options.length] = node;
+        Options[Options.length] = response.name;
         console.log(Options[Options.length - 1]);
         name = response.name;
         var friend = {
@@ -292,7 +292,7 @@ FB.api("/me/taggable_friends",function (response) {
       para.appendChild(node);
       var element = document.getElementById("select");
       element.appendChild(para);
-      Options[Options.length] = node;
+      Options[Options.length] = response.data[i].name;
       console.log(Options[Options.length - 1]);
     }
   }
