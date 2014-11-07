@@ -132,7 +132,6 @@ function startRandom(){
         var rand = Math.floor(Math.random() * Friends.length);
         $("#randname").text(Friends[rand].name);
         $("#randpic").attr("src",Friends[rand].picurl);
-        $("#randname").show();
         $("#close").show();
         i = 0;
       }
@@ -143,6 +142,7 @@ function startRandom(){
 $("#startrandom").click(function(){
   $(this).hide();
   $("#randpic").show();
+  $("#randname").show();
 });
 
 $("#random").click(function(){
