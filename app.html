@@ -52,11 +52,11 @@
           <h4 class="modal-title" id="randname"></h4>
         </div>
         <div class="modal-body text-center">
-          <img class="image-responsive" width="200" height="200" id="randpic" >
+          <img class="image-responsive" width="100" height="100" id="randpic" >
           <div type="button" id="startrandom" class="btn btn-success" onclick="startRandom()">Do Straws</div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+          <button type="button" id ="close" class="btn btn-warning" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -115,27 +115,17 @@ function eraseRow(num){
   };
 }
 
-var rand;
-var i=0;
-
-function Random(){
-  rand = Math.floor(Math.random() * Friends.length);
-  $("#randpic").attr("src",Friends[rand].picurl);
-  i=i+1;
-  startRandom();
-};
-
 function startRandom(){
   setTimeout(
     function(){
-      if (i < 100) {
-        Random();
+      for (var i = 0; i < 100; i++) {
+        $("#randpic").attr("src",Friends[i%Friends.length].picurl);
       }else{
-        rand = Math.floor(Math.random() * Friends.length);
+        var rand = Math.floor(Math.random() * Friends.length);
         $("#randname").text(Friends[rand].name);
         $("#randpic").attr("src",Friends[rand].picurl);
         $("#randname").show();
-        i = 0;
+        $("#close").show();
       }
     }
     ,50);
@@ -149,7 +139,11 @@ $("#startrandom").click(function(){
 $("#random").click(function(){
   $("#startrandom").show();
   $("#randpic").hide();
+  $("#close").hide();
   $("#randname").hide();
+  if (Friends.length == 0) {
+    $("#myModal").modal("hide");
+  }
 });
 
 function isAdded(name){
