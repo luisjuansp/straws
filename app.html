@@ -23,11 +23,8 @@
   <center>
     <div class="ui-widget">
       <input id="autocomplete">
+      <div type="button" id="friends" class="btn btn-default" onclick="getFriend()">Add Friend</div>
     </div>
-    <select id="select" type="select" class="text-center">
-      <option>---Friends---</option>
-    </select>
-    <div type="button" id="friends" class="btn btn-default" onclick="getFriend()">Add Friend</div>
   </center><br>
   <div class="col-md-3"></div>
   <div class="row text-center">
@@ -165,7 +162,7 @@ function isAdded(name){
 }
 
 function getFriend(){
-  var name = $( "#select option:selected" ).text();
+  var name = $("#autocomplete;").val();
   FB.api("/me",function (response) {
     if (response && !response.error) {
       if (response.name== name){
@@ -248,11 +245,6 @@ FB.api("/me/taggable_friends",function (response) {
       // Logged into your app and Facebook.
       testAPI();
       FB.api("/me",function (response){
-        var para = document.createElement("option");
-        var node = document.createTextNode(response.name);
-        para.appendChild(node);
-        var element = document.getElementById("select");
-        element.appendChild(para);
         Options[Options.length] = response.name;
         console.log(Options[Options.length - 1]);
         name = response.name;
@@ -286,11 +278,6 @@ FB.api("/me/taggable_friends",function (response) {
 FB.api("/me/taggable_friends",function (response) {
   if (response && !response.error) {
     for(var i = 0; i<response.data.length; i++){
-      var para = document.createElement("option");
-      var node = document.createTextNode(response.data[i].name);
-      para.appendChild(node);
-      var element = document.getElementById("select");
-      element.appendChild(para);
       Options[Options.length] = response.data[i].name;
       console.log(Options[Options.length - 1]);
     }
@@ -298,11 +285,11 @@ FB.api("/me/taggable_friends",function (response) {
 });
 $( "#autocomplete" ).autocomplete({
   source: function( request, response ) {
-          var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
-          response( $.grep( Options, function( item ){
-              return matcher.test( item );
-          }) );
-      }
+    var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+    response( $.grep( Options, function( item ){
+      return matcher.test( item );
+    }) );
+  }
 });
 } else if (response.status === 'not_authorized') {
  FB.login(
