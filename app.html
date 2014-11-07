@@ -120,7 +120,7 @@ var i=0;
 
 function Random(){
   rand = Math.floor(Math.random() * Friends.length);
-  $("#randpic").attr("src","http://graph.facebook.com/"+Friends[rand].id+"/picture?type=large");
+  $("#randpic").attr("src",Friends[rand].picurl);
   i=i+1;
   startRandom();
 };
@@ -133,7 +133,7 @@ function startRandom(){
       }else{
         rand = Math.floor(Math.random() * Friends.length);
         $("#randname").text(Friends[rand].name);
-        $("#randpic").attr("src","http://graph.facebook.com/"+Friends[rand].id+"/picture?type=large");
+        $("#randpic").attr("src",Friends[rand].picurl);
         $("#randname").show();
         i = 0;
       }
@@ -168,14 +168,12 @@ function getFriend(){
       if (response.name== name){
         var friend = {
           name : "",
-          picurl : "",
-          id : ""
+          picurl : ""
         };    
         var img = document.createElement('img');
         img.src = "http://graph.facebook.com/"+response.id+"/picture";
         friend.picurl = img.src;
         friend.name = name;
-        friend.id = response.id;
         if(isAdded(name)){
           Friends[Friends.length] = friend;
           var table = document.getElementById("table");
@@ -207,8 +205,7 @@ FB.api("/me/taggable_friends",function (response) {
         img.src = response.data[i].picture.data.url;
         var friend = {
           name : name,
-          picurl : img.src,
-          id : response.data[i].id
+          picurl : img.src
         };
         if(isAdded(name)){
           Friends[Friends.length] = friend;
