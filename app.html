@@ -3,8 +3,9 @@
 <head>
 	<link rel="stylesheet" href="css/slate.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script src="http://code.jquery.com/ui/1.11.2/jqueryui/1.11.2/jquery-ui.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="stylesheet" href="css/list.css">
   <title>Straws</title>
   <script type="text/javascript">
@@ -112,6 +113,96 @@ function eraseRow(num){
   };
 }
 
+$("select").combobox();
+
+$.widget( "ui.combobox", {
+  _create: function() {
+    var self = this;
+    var select = this.element.hide(),
+    selected = select.children( ":selected" ),
+    value = selected.val() ? selected.text() : "";
+    var input = $( "<input />" )
+    .insertAfter(select)
+    .val( value )
+    .autocomplete({
+      delay: 0,
+      minLength: 0,
+      source: function(request, response) {
+        var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+        response( select.children("option" ).map(function() {
+          var text = $( this ).text();
+          if ( this.value && ( !request.term || matcher.test(text) ) )
+            return {
+              label: text.replace(
+                new RegExp(
+                  "(?![^&;]+;)(?!<[^<>]*)(" +
+                    $.ui.autocomplete.escapeRegex(request.term) +
+                    ")(?![^<>]*>)(?![^&;]+;)", "gi"),
+                "<strong>$1</strong>"),
+              value: text,
+              option: this
+            };
+          }) );
+      },
+      select: function( event, ui ) {
+        ui.item.option.selected = true;
+        self._trigger( "selected", event, {
+          item: ui.item.option
+        });
+      },
+      change: function(event, ui) {
+        if ( !ui.item ) {
+          var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( $(this).val() ) + "$", "i" ),
+          valid = false;
+          select.children( "option" ).each(function() {
+            if ( this.value.match( matcher ) ) {
+              this.selected = valid = true;
+              return false;
+            }
+          });
+          if ( !valid ) {
+              // remove invalid value, as it didn't match anything
+              $( this ).val( "" );
+              select.val( "" );
+              return false;
+            }
+          }
+        }
+      })
+.addClass("ui-widget ui-widget-content ui-corner-left");
+
+input.data( "autocomplete" )._renderItem = function( ul, item ) {
+  return $( "<li></li>" )
+  .data( "item.autocomplete", item )
+  .append( "<a>" + item.label + "</a>" )
+  .appendTo( ul );
+};
+
+$( "<button> </button>" )
+.attr( "tabIndex", -1 )
+.attr( "title", "Show All Items" )
+.insertAfter( input )
+.button({
+  icons: {
+    primary: "ui-icon-triangle-1-s"
+  },
+  text: false
+})
+.removeClass( "ui-corner-all" )
+.addClass( "ui-corner-right ui-button-icon" )
+.click(function() {
+      // close if already visible
+      if (input.autocomplete("widget").is(":visible")) {
+        input.autocomplete("close");
+        return;
+      }
+      // pass empty string as value to search for, displaying all results
+      input.autocomplete("search", "");
+      input.focus();
+    });
+}
+});
+
 var rand;
 var i=0;
 
@@ -160,20 +251,20 @@ function isAdded(name){
 
 function getFriend(){
   var name = $( "#select option:selected" ).text();
-    FB.api("/me",function (response) {
-      if (response && !response.error) {
-        if (response.name== name){
-          var friend = {
-            name : "",
-            picurl : ""
-          };    
-          var img = document.createElement('img');
-          img.src = "http://graph.facebook.com/"+response.id+"/picture";
-          friend.picurl = img.src;
-          friend.name = name;
-          if(isAdded(name)){
-            Friends[Friends.length] = friend;
-            var table = document.getElementById("table");
+  FB.api("/me",function (response) {
+    if (response && !response.error) {
+      if (response.name== name){
+        var friend = {
+          name : "",
+          picurl : ""
+        };    
+        var img = document.createElement('img');
+        img.src = "http://graph.facebook.com/"+response.id+"/picture";
+        friend.picurl = img.src;
+        friend.name = name;
+        if(isAdded(name)){
+          Friends[Friends.length] = friend;
+          var table = document.getElementById("table");
             // Create an empty <tr> element and add it to the 1st position of the table:
             var row = table.insertRow(rows);
             var btn = document.createElement('button');
@@ -194,19 +285,19 @@ function getFriend(){
         } 
       }
     });
-    FB.api("/me/taggable_friends",function (response) {
-      if (response && !response.error) {
-        for(var i = 0; i<response.data.length; i++){
-          if (response.data[i].name== name){
-            var img = document.createElement('img');
-            img.src = response.data[i].picture.data.url;
-            var friend = {
-              name : name,
-              picurl : img.src
-            };
-            if(isAdded(name)){
-            Friends[Friends.length] = friend;
-            var table = document.getElementById("table");
+FB.api("/me/taggable_friends",function (response) {
+  if (response && !response.error) {
+    for(var i = 0; i<response.data.length; i++){
+      if (response.data[i].name== name){
+        var img = document.createElement('img');
+        img.src = response.data[i].picture.data.url;
+        var friend = {
+          name : name,
+          picurl : img.src
+        };
+        if(isAdded(name)){
+          Friends[Friends.length] = friend;
+          var table = document.getElementById("table");
             // Create an empty <tr> element and add it to the 1st position of the table:
             var row = table.insertRow(rows);
             var btn = document.createElement('button');
@@ -224,10 +315,10 @@ function getFriend(){
             cell2.innerHTML = name;
             cell3.appendChild(btn);
           }
-          }
         }
       }
-    });
+    }
+  });
 }
 
  // This is called with the results from from FB.getLoginStatus().
@@ -275,28 +366,28 @@ function getFriend(){
         cell2.innerHTML = name;
         cell3.appendChild(btn);
       });
-      FB.api("/me/taggable_friends",function (response) {
-        if (response && !response.error) {
-          for(var i = 0; i<response.data.length; i++){
-            var para = document.createElement("option");
-            var node = document.createTextNode(response.data[i].name);
-            para.appendChild(node);
-            var element = document.getElementById("select");
-            element.appendChild(para);
-          }
-        }
-      });
-    } else if (response.status === 'not_authorized') {
-     FB.login(
-      function(response) {
-       console.log(response);
-     },
-     {
-       scope: 'public_profile,email,user_friends',
-       auth_type: 'rerequest'
-     }
-     );
-   } else {
+FB.api("/me/taggable_friends",function (response) {
+  if (response && !response.error) {
+    for(var i = 0; i<response.data.length; i++){
+      var para = document.createElement("option");
+      var node = document.createTextNode(response.data[i].name);
+      para.appendChild(node);
+      var element = document.getElementById("select");
+      element.appendChild(para);
+    }
+  }
+});
+} else if (response.status === 'not_authorized') {
+ FB.login(
+  function(response) {
+   console.log(response);
+ },
+ {
+   scope: 'public_profile,email,user_friends',
+   auth_type: 'rerequest'
+ }
+ );
+} else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
       window.location = "index.html";
