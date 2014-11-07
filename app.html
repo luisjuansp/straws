@@ -120,7 +120,7 @@ var i=0;
 
 function Random(){
   rand = Math.floor(Math.random() * Friends.length);
-  $("#randpic").attr("src","http://graph.facebook.com/"+Friends[rand].id+"/picture");
+  $("#randpic").attr("src","http://graph.facebook.com/"+Friends[rand].id+"/picture?type=large");
   i=i+1;
   startRandom();
 };
@@ -133,7 +133,7 @@ function startRandom(){
       }else{
         rand = Math.floor(Math.random() * Friends.length);
         $("#randname").text(Friends[rand].name);
-        $("#randpic").attr("src","http://graph.facebook.com/"+Friends[rand].id+"/picture");
+        $("#randpic").attr("src","http://graph.facebook.com/"+Friends[rand].id+"/picture?type=large");
         $("#randname").show();
         i = 0;
       }
