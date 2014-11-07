@@ -115,17 +115,26 @@ function eraseRow(num){
   };
 }
 
+var i=0;
+
+function Random(){
+  $("#randpic").attr("src",Friends[i%Friends.length].picurl);
+  i=i+1;
+  startRandom();
+};
+
 function startRandom(){
   setTimeout(
     function(){
-      for (var i = 0; i < 100; i++) {
-        $("#randpic").attr("src",Friends[i%Friends.length].picurl);
+      if (i < 100) {
+        Random();
       }else{
         var rand = Math.floor(Math.random() * Friends.length);
         $("#randname").text(Friends[rand].name);
         $("#randpic").attr("src",Friends[rand].picurl);
         $("#randname").show();
         $("#close").show();
+        i = 0;
       }
     }
     ,50);
