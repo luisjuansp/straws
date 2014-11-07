@@ -49,7 +49,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header text-center">
-          <h4 class="modal-title" id="randname">?????????</h4>
+          <h4 class="modal-title" id="randname"></h4>
         </div>
         <div class="modal-body text-center">
           <img class="image-responsive" width="100" height="100" id="randpic" >
@@ -143,6 +143,7 @@ $("#startrandom").click(function(){
   $(this).hide();
   $("#randpic").show();
   $("#randname").show();
+  $("#randname").text("?????????");
 });
 
 $("#random").click(function(){
