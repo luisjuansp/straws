@@ -22,7 +22,6 @@
   </div>
   <center>
     <div class="ui-widget">
-      <label for="autocomplete">Tags: </label>
       <input id="autocomplete">
     </div>
     <select id="select" type="select" class="text-center">
@@ -298,7 +297,12 @@ FB.api("/me/taggable_friends",function (response) {
   }
 });
 $( "#autocomplete" ).autocomplete({
-  source: Options
+  source: function( request, response ) {
+          var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+          response( $.grep( Options, function( item ){
+              return matcher.test( item );
+          }) );
+      }
 });
 } else if (response.status === 'not_authorized') {
  FB.login(
