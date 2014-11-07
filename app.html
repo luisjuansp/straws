@@ -52,7 +52,7 @@
           <h4 class="modal-title" id="randname"></h4>
         </div>
         <div class="modal-body text-center">
-          <img class="image-responsive" width="420" height="420" id="randpic" >
+          <img class="image-responsive" width="200" height="200" id="randpic" >
           <div type="button" id="startrandom" class="btn btn-success" onclick="startRandom()">Do Straws</div>
         </div>
         <div class="modal-footer">
@@ -163,6 +163,7 @@ function isAdded(name){
 
 function getFriend(){
   var name = $("#autocomplete").val();
+  $("#autocomplete".val('');
   FB.api("/me",function (response) {
     if (response && !response.error) {
       if (response.name== name){
