@@ -162,7 +162,7 @@ function isAdded(name){
 }
 
 function getFriend(){
-  var name = $("#autocomplete;").val();
+  var name = $("#autocomplete").val();
   FB.api("/me",function (response) {
     if (response && !response.error) {
       if (response.name== name){
