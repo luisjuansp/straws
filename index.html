@@ -6,7 +6,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="shortcut icon" href="images/MadDevsicon.png">
-	<title>Straws</title>
+  <title>Straws</title>
 </head>
 <body { padding-top: 70px; }>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -27,17 +27,17 @@
       </div>
     </div>
   </nav>
-  
-	<script>
+  <br><br><br>
+  <script>
 
-	window.fbAsyncInit = function() {
-		FB.init({
-			appId      : '890387507641159',
+  window.fbAsyncInit = function() {
+    FB.init({
+     appId      : '890387507641159',
     cookie     : true,  // enable cookies to allow the server to access the session
     status     : true,
     xfbml      : true,  // parse social plugins on this page
     version    : 'v2.1' // use version 2.1
-});
+  });
 
   // Now that we've initialized the JavaScript SDK, we call 
   // FB.getLoginStatus().  This function gets the state of the
@@ -69,15 +69,15 @@
       // Logged into your app and Facebook.
       testAPI();
       window.location = "app.html";
-  } else if (response.status === 'not_authorized') {
+    } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
-  } else {
+    } else {
       // The person is not logged into Facebook, so we're not sure if
       // they are logged into this app or not.
       document.getElementById('status').innerHTML = 'Please log ' + 'into Facebook.';
+    }
   }
-}
 
   // This function is called when someone finishes with the Login
   // Button.  See the onlogin handler attached to it in the sample
